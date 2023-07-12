@@ -15,8 +15,8 @@ OdomToTFNode::OdomToTFNode() : rclcpp::Node("odom_to_tf_node")
     const auto history_size{declare_parameter("qos_history", 1)};
     const auto qos = rclcpp::QoS{static_cast<std::size_t>(history_size)};
     m_parent_frame = declare_parameter<std::string>("parent_frame", "map");
-    m_ego_frame = declare_parameter<std::string>("ego_frame", "rear_axle_middle_ground");
-    m_opp_frame = declare_parameter<std::string>("opp_frame", "base_link");
+    m_ego_frame = declare_parameter<std::string>("ego_frame", "base_link");
+    m_opp_frame = declare_parameter<std::string>("opp_frame", "opp_rear_axle_middle_ground");
 
     m_odom_ego_subscription = create_subscription<nav_msgs::msg::Odometry>(
         "odom_ego", qos, std::bind(&OdomToTFNode::odom_ego_callback, this, std::placeholders::_1));
